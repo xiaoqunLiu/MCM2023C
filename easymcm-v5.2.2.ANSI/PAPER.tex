@@ -1,0 +1,257 @@
+%% ����ģ�壺���Ĳ���
+
+\documentclass[12pt]{article}  % �ٷ�Ҫ���ֺŲ�С�� 12 �ţ��˴�ѡ�� 12 ������
+
+% ��ģ�岻��Ҫ��д���ݣ��Ե�ǰ����ʱ���Զ�����
+% �������µķ���������д�������ƺ�
+\usepackage[1234567]{easymcm}  % ���� EasyMCM ģ���ļ�
+\problem{A}  % ���ڴ˴���д����
+\usepackage{mathptmx}  % ���� Times ���壬�й��о� 
+%\usepackage{mathpazo}  % ���� COMAP �ٷ���־���õĸ��ÿ��� Palatino ���壬���������ϵ� mathptmx ����
+
+\title{An MCM Paper Made by Team 1234567}  % ����
+
+% ����Ҫ�޸���ͷ��Ĭ��Ϊ MCM/ICM������ʹ����������˴��޸�Ϊ MCM��
+%\renewcommand{\contest}{MCM}
+
+% �ĵ���ʼ
+\begin{document}
+
+% �˴���дժҪ����
+\begin{abstract}
+    Here is the abstract of your paper.
+
+    Firstly, that is ...
+
+    Secondly, that is ...
+
+    Finally, that is ...
+
+    % \vspace{5pt}
+    % \textbf{Keywords}: MATLAB, mathematics, LaTeX.
+
+\end{abstract}
+
+\maketitle 
+%\tableofcontents 
+
+
+
+\section{Introduction}
+\subsection{Problem Background}
+Here is the problem background ...
+
+Two major problems are discussed in this paper, which are:
+\begin{itemize}
+    \item Doing the first thing.
+    \item Doing the second thing.
+\end{itemize}
+
+\subsection{Literature Review}
+A literatrue\cite{1} say something about this problem ...
+
+\subsection{Our work}
+We do such things ...
+
+\begin{enumerate}[\bfseries 1.]
+    \item We do ...
+    \item We do ...
+    \item We do ...
+\end{enumerate}
+
+\section{Preparation of the Models}
+\subsection{Assumptions}
+
+\subsection{Notations}
+The primary notations used in this paper are listed in Table \ref{tb:notation}.
+
+
+\begin{table}[!htbp]
+\begin{center}
+\caption{Notations}
+\begin{tabular}{cl}
+	\toprule
+	\multicolumn{1}{m{3cm}}{\centering Symbol}
+	&\multicolumn{1}{m{8cm}}{\centering Definition}\\
+	\midrule
+	$A$&the first one\\
+	$b$&the second one\\
+	$\alpha$ &the last one\\
+	\bottomrule
+\end{tabular}\label{tb:notation}
+\end{center}
+\end{table}
+
+\section{The Models}
+\subsection{Model 1}
+\subsubsection{Details about Model 1}
+The detail can be described by equation \eqref{eq:heat}:
+\begin{equation}\label{eq:heat}
+\frac{\partial u}{\partial t} - a^2 \left( \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} + \frac{\partial^2 u}{\partial z^2} \right) = f(x, y, z, t)
+\end{equation}
+
+\subsection{Model 2}
+\subsubsection{Conclusion of Model 2}
+The results are shown in Figure \ref{fig:result}, where $t$ denotes the time in seconds, and $c$ refers to the concentration of water in the boiler.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.8\textwidth]{water.png}
+\caption{The result of Model 2}\label{fig:result}
+\end{figure}
+
+\clearpage
+\subsubsection{Commetary on Model 2}
+The instance of long and wide tables are shown in Table \ref{tb:longtable}.
+
+% ������ʾ���������÷����ο� longtable �����ĵ�
+% ���»�������Ӧ������ʵ�ֱ����ڵ��Զ��������������Զ���ҳ
+% ��Ҳ����ѡ���������� tabularx ��������ͨ�� X ����ָ����Ӧ���Զ�����
+\begin{longtable}{ p{4em} p{14em} p{14em} }
+\caption{Basic Information about Three Main Continents (scratched from Wikipedia)}
+\label{tb:longtable}\\
+\toprule
+Continent & Description & Information \\
+\midrule
+Africa & Africa Continent is surrounded by the Mediterranean Sea to the
+north, the Isthmus of Suez and the Red Sea to the northeast, the Indian
+Ocean to the southeast and the Atlantic Ocean to the west. &
+At about 30.3 million km$^2$ including adjacent islands, it covers 6\%
+of Earth's total surface area and 20\% of its land area. With 1.3
+billion people as of 2018, it accounts for about 16\% of the world's
+human population. \\
+\midrule
+Asia & Asia is Earth's largest and most populous continent which
+located primarily in the Eastern and Northern Hemispheres.
+It shares the continental landmass of Eurasia with the continent
+of Europe and the continental landmass of Afro-Eurasia with both
+Europe and Africa. &
+Asia covers an area of 44,579,000 square kilometres, about 30\%
+of Earth's total land area and 8.7\% of the Earth's total surface
+area. Its 4.5 billion people (as of June 2019) constitute roughly
+60\% of the world's population. \\
+\midrule
+Europe & Europe is a continent located entirely in the Northern
+Hemisphere and mostly in the Eastern Hemisphere. It comprises the
+westernmost part of Eurasia and is bordered by the Arctic Ocean to
+the north, the Atlantic Ocean to the west, the Mediterranean Sea to
+the south, and Asia to the east. &
+Europe covers about 10,180,000 km$^2$, or 2\% of the Earth's surface
+(6.8\% of land area), making it the second smallest
+continent. Europe had a total population of about 741 million (about
+11\% of the world population) as of 2018. \\
+\bottomrule
+\end{longtable}
+
+Figure \ref{fig:subfigures} gives an example of subfigures. Figure \ref{subfig:left} is on the left, and Figure \ref{subfig:right} is on the right.
+
+% ��ͼ����ͼ���У�ʾ���������÷����ο� subfigure �����ĵ�
+% ������ֻϣ������ͼ���У�����Ҫ������ caption����ô�� figure ������
+% ���������ܿ��Ȳ����� \textwidth �Ķ��� \includegraphics �����
+\begin{figure}[htbp]
+\centering
+\begin{subfigure}[b]{.4\textwidth}
+\includegraphics[width=\textwidth]{water.png}
+\caption{Image on the left}\label{subfig:left}
+\end{subfigure}
+\begin{subfigure}[b]{.4\textwidth}
+\includegraphics[width=\textwidth]{water.png}
+\caption{Image on the right}\label{subfig:right}
+\end{subfigure}
+\caption{Two images}\label{fig:subfigures}
+\end{figure}
+
+\section{Strengths and Weaknesses}
+\subsection{Strengths}
+\begin{itemize}
+    \item First one...
+    \item Second one ...
+\end{itemize}
+
+\subsection{Weaknesses}
+\begin{itemize}
+    \item Only one ...
+ \end{itemize}
+
+
+% ����Ϊ�ż�/����¼���֣�����Ҫ������ȥ��
+% ������Ҫ�ɽ����� letter �����ƶ������¿�ͷ���м�
+% ���ڵڶ�������������д���⣬�硸�ż�����Letter���򡸱���¼����Memorandum��
+\begin{letter}{Memorandum}
+\begin{flushleft}  % �����뻷��������������
+\textbf{To:} Heishan Yan\\
+\textbf{From:} Team 1234567\\
+\textbf{Date:} October 1st, 2019\\
+\textbf{Subject:} A better choice than MS Word: \LaTeX
+\end{flushleft}
+
+In the memo, we want to introduce you an alternate typesetting program to the prevailing MS Word: \textbf{\LaTeX}. In fact, the history of \LaTeX\ is even longer than that of MS Word. In 1970s, the famous computer scientist Donald Knuth first came out with a typesetting program, which named \TeX\ \ldots
+
+Firstly, \ldots
+
+Secondly, \ldots
+
+Lastly, \ldots
+
+According to all those mentioned above, it is really worth to have a try on \LaTeX! 
+\end{letter}
+
+
+% �ο����ף��˴��� MLA ���ø�ʽΪ��
+\begin{thebibliography}{99}
+\bibitem{1} Einstein, A., Podolsky, B., \& Rosen, N. (1935). Can quantum-mechanical description of physical reality be considered complete?. \emph{Physical review}, 47(10), 777.
+\bibitem{2} \emph{A simple, easy \LaTeX\ template for MCM/ICM: EasyMCM}. (2018). Retrieved December 1, 2019, from\url{https://www.cnblogs.com/xjtu-blacksmith/p/easymcm.html}
+\end{thebibliography}
+
+
+% ����Ϊ��¼����
+% �����������в���Ҫ��¼��������ɾ��
+\begin{subappendices}  % ��¼����
+
+\section{Appendix A: Further on \LaTeX}
+To clarify the importance of using \LaTeX\ in MCM or ICM, several points need to be covered, which are \ldots
+
+To be more specific, \ldots
+
+All in all, \ldots
+
+Anyway, nobody \textbf{really} needs such appendix \ldots
+
+\section{Appendix B: Program Codes}
+Here are the program codes we used in our research.
+
+% ���뻷��ʾ������
+% ���������Ĳ���Ҫչʾ���룬��ɾ��
+% �����÷������ο� listings �����ĵ�
+
+% Python ����ʾ��
+\begin{lstlisting}[language=Python, name={test.py}]
+# Python code example
+for i in range(10):
+    print('Hello, world!')
+\end{lstlisting}
+
+% MATLAB ����ʾ��
+\begin{lstlisting}[language=MATLAB, name={test.m}]
+% MATLAB code example
+for i = 1:10
+    disp("hello, world!");
+end
+\end{lstlisting}
+
+% C++ ����ʾ��
+\begin{lstlisting}[language=C++, name={test.cpp}]
+// C++ code example
+#include <iostream>
+using namespace std;
+
+int main() {
+    for (int i = 0; i < 10; i++)
+        cout << "hello, world" << endl;
+    return 0;
+}
+\end{lstlisting}
+
+\end{subappendices}  % ��¼���ݽ���
+
+\end{document}  % ����
