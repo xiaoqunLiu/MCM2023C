@@ -1,0 +1,332 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\hypertarget{ux8bbaux6587ux5199ux4f5c}{%
+\subsection{论文写作}\label{ux8bbaux6587ux5199ux4f5c}}
+
+\hypertarget{q3}{%
+\subsubsection{Q3}\label{q3}}
+
+Develop and summarize a model to classify solution words by difficulty.
+Identify the attributes of a given word that are associated with each
+classification. Using your model, how difficult is the word EERIE?
+Discuss the accuracy of your classification model.
+
+开发并总结了一个模型，按难度对解词进行分类。识别与每个分类相关联的给定单词的属性。用你的模型，EERIE这个词有多难?讨论你的分类模型的准确性。
+
+\hypertarget{ux95eeux9898ux5206ux6790}{%
+\paragraph{问题分析}\label{ux95eeux9898ux5206ux6790}}
+
+There are four tasks we need to accomplish:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Classify the samples by difficulty
+\item
+  Identify the attributes of a given word associated with each
+  classification
+\item
+  How hard is the word EERIE?
+\item
+  Discuss the accuracy of your classification model
+\end{enumerate}
+
+This is a scatter plot of mean and standard deviation
+
+\textbf{主要指标的散点图}
+
+\includegraphics{C:/Users/Yupeng Su/OneDrive/桌面/美赛建模/Q3图片/聚类前散点图.png}
+
+第三位要求我们分类，但是数据集中并没有事先给定的难度等级。
+
+所以第一步，我们使用聚类分析，对均值与标准差按距离进行无监督的Kmeans聚类，并拟合出概率分布直方图去直观的进行难度分类
+
+第二步，我们使用随机森林分类模型，对单词属性的五个指标（列出），对第一步聚类所形成的target进行映射，拟合出一个分类器，方便后续对单词的预测。
+
+第三步，我们将EERIE的单词属性做评估，再放入训练好的随机森林模型中做预测，给EERIE这个单词做难度定性。
+
+Accordingly, the model construction and analysis of the third question
+can be divided into four steps：
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Using percentage and included attributes to do cluster analysis
+
+  In this section, we use K-means clustering analysis to cluster the
+  mean value and standard deviation according to the distance, and fit
+  the probability distribution histogram for difficulty classification
+\item
+  Using word attributes to map classification by classification model
+
+  We use the random forest classification model to map the five
+  indicators of word attributes (EN, TR, GS, YS, CS) and the target
+  formed by the clustering in the first step, and fit a classifier to
+  facilitate the subsequent word prediction.
+\item
+  Put EERIE into a classifier for sorting
+
+  We evaluated the word attributes of EERIE, then put them into the
+  trained random forest model for prediction, and determined the
+  difficulty of the word EERIE.
+\item
+  Get a representation of the model\textquotesingle s performance on the
+  test set
+\end{enumerate}
+
+\hypertarget{ux6a21ux578bux539fux7406}{%
+\subsubsection{模型原理}\label{ux6a21ux578bux539fux7406}}
+
+K-means clustering is a common unsupervised learning algorithm used to
+divide a data set into multiple different groups (clusters). The
+similarity of data points within each group is high, while the
+similarity between different groups is low. The optimization goal of
+K-means algorithm is to minimize the Sum of distance (SSE, Sum of
+Squared Errors) between each data point and the clustering center of the
+cluster it belongs to. Therefore, the main steps of k-means clustering
+include selecting the appropriate K value, initializing the clustering
+center, allocating data points to the cluster, calculating the center
+point of the cluster, and iterating until convergence is reached.
+
+The principle of random forest classification is the same as that of
+random forest regression used in the second question, so I will not
+repeat it here.
+
+\hypertarget{ux6a21ux578bux5047ux8bbe}{%
+\subsubsection{模型假设}\label{ux6a21ux578bux5047ux8bbe}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Suppose that the difficulty of the word is described only by the
+  percentage distribution of the number of reports, independent of other
+  factors such as the percentage of difficult patterns chosen.
+\item
+  Suppose that the percentage distribution of the number of reports is
+  close to a normal distribution, which can be well described by means
+  and standard deviations alone.
+\item
+  Suppose that the mean of the distribution of reporting times can
+  better reflect the difficulty of words than the standard deviation. In
+  K-means analysis, the weight ratio of mean to standard deviation is
+  6:5.
+\item
+  Suppose that noise caused by chance will not obscure the
+  characteristics of standard deviation and mean
+\end{enumerate}
+
+\hypertarget{ux4e3bux8981ux6a21ux578b}{%
+\subsubsection{主要模型}\label{ux4e3bux8981ux6a21ux578b}}
+
+The first step is to construct the clustering model with K-means
+clustering
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The data is normalized and the mean is multiplied by 1.2, making the
+  weight ratio of mean to standard deviation 6:5.
+\item
+  Using elbow method and Silhouette Coefficient, the optimal clustering
+  number was determined to be 4（左右各一张图）
+
+  \includegraphics{C:/Users/Yupeng Su/OneDrive/桌面/美赛建模/Q3图片/手肘法.png}
+\end{enumerate}
+
+\includegraphics{C:/Users/Yupeng Su/OneDrive/桌面/美赛建模/Q3图片/轮廓系数.png}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Here is the clustering result (the asterisk is the clustering center)
+
+  \includegraphics{C:/Users/Yupeng Su/OneDrive/桌面/美赛建模/Q3图片/聚类图像.png}
+\item
+  The distribution histogram and normal distribution diagram of
+  different difficulty are summarized
+
+  \begin{itemize}
+  \item
+    Simple
+
+    \includegraphics{C:/Users/Yupeng Su/OneDrive/桌面/美赛建模/Q3图片/类别4平均分布(简单).png}
+  \item
+    Ordinary
+
+    \includegraphics{C:/Users/Yupeng Su/OneDrive/桌面/美赛建模/Q3图片/类别2平均分布(一般).png}
+  \item
+    Rather Difficult
+
+    \includegraphics{C:/Users/Yupeng Su/OneDrive/桌面/美赛建模/Q3图片/类别1平均分布(较难).png}
+  \item
+    Difficult
+
+    \includegraphics{C:/Users/Yupeng Su/OneDrive/桌面/美赛建模/Q3图片/类别3平均分布(困难).png}
+  \end{itemize}
+\end{enumerate}
+
+Second, the random forest classification model is no longer used to
+classify word features
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Adjustment parameter
+
+  The optimal parameters of random forest are determined by grid search
+  and learning curve
+
+  \textbf{large-scale learning curve}
+
+  \includegraphics{C:/Users/Yupeng Su/OneDrive/桌面/美赛建模/Q3图片/大纵深学习曲线.png}
+
+  \textbf{Small region learning curve}
+
+  \includegraphics{C:/Users/Yupeng Su/OneDrive/桌面/美赛建模/Q3图片/小范围学习曲线.png}
+\end{enumerate}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+parameter & Value \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{n\_estimators} & 189 \\
+\texttt{max\_depth} & 10 \\
+\texttt{min\_samples\_leaf} & 6 \\
+\texttt{min\_samples\_split} & None \\
+\end{longtable}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Training random forest classification models
+
+  Classified image
+
+  \includegraphics{C:/Users/Yupeng Su/OneDrive/桌面/美赛建模/Q3图片/随机森林分类图像.png}
+
+  Accuracy for the training set：0.736
+
+  Accuracy for the testing set：0.523
+\item
+  The importance of the feature
+\end{enumerate}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Feature & Degree of importance (\%) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+entropy & 37.54 \\
+text\_rate & 15.58 \\
+green\_score & 21.12 \\
+yellow\_score & 14.30 \\
+conbine\_score & 11.44 \\
+\end{longtable}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Predict word difficulty（EERIE）
+
+  \textbf{Predicted classification}：（Difficult）
+
+  \textbf{Classification probability}
+
+  \begin{longtable}[]{@{}ll@{}}
+  \toprule\noalign{}
+  classification & probability \\
+  \midrule\noalign{}
+  \endhead
+  \bottomrule\noalign{}
+  \endlastfoot
+  Simple & 9.54 \\
+  Ordinary & 14.09 \\
+  Rather difficult & 13.63 \\
+  difficult & 62.73 \\
+  \end{longtable}
+\end{enumerate}
+
+\end{document}
